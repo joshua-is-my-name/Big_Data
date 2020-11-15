@@ -1,0 +1,33 @@
+# Create map() transion to cube numbers
+cubedRDD = numbRDD.map(lambda x: x**3)
+
+# Collect the results
+numbers_all = cubedRDD.collect()
+
+# Print the numbers from numbers_all
+for numb in numbers_all:
+	print(numb)
+  
+  # Filter the fileRDD to select lines with Spark keyword
+fileRDD_filter = fileRDD.filter(lambda line: 'Spark' in line)
+
+# How many lines are there in fileRDD?
+print("The total number of lines with the keyword Spark is", fileRDD_filter.count())
+
+# Print the first four lines of fileRDD
+for line in fileRDD_filter.take(4): 
+	print(line)
+
+# Display the first 10 words and their frequencies
+for word in resultRDD.take(10):
+	print(word)
+
+# Swap the keys and values 
+resultRDD_swap = resultRDD.map(lambda x: (x[1], x[0]))
+
+# Sort the keys in descending order
+resultRDD_swap_sort = resultRDD_swap.sortByKey(ascending=False)
+
+# Show the top 10 most frequent words and their frequencies
+for word in resultRDD_swap_sort.take(10):
+	print("{} has {} counts". format(word[1], word[0]))
